@@ -12,7 +12,9 @@
     ];
 
     $isDevMode = true;
-
+    /*
+        lembrar de criar argivo separado com configuracao do banco
+    */
     $dbParams = [
         'driver' => 'pdo_mysql',
         'user' => 'root',
