@@ -11,12 +11,14 @@ class Category
      * @Id
      *
      * @Column(type="integer")
+     * 
      * @GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @Column(type="string", length=100)
+     * 
      */
     private $name;    
 
@@ -43,6 +45,7 @@ class Category
      * Set the value of name
      *
      * @return self
+     * 
      */ 
     public function setName($name)
     {
