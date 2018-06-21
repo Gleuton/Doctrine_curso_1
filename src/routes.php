@@ -8,28 +8,38 @@ $request = ServerRequestFactory::fromGlobals(
     $_SERVER, $_GET, $_POST, $_COOKIE, $_FILES
 );
 
-    $routerContainer = new RouterContainer();
-    $generator = $routerContainer->getGenerator();
-    $view = new \Slim\Views\PhpRenderer(__DIR__ . '/../templates/');
-    $map = $routerContainer->getMap();
+$routerContainer = new RouterContainer();
+$generator = $routerContainer->getGenerator();
+$view = new \Slim\Views\PhpRenderer(__DIR__ . '/../templates/');
+$map = $routerContainer->getMap();
+$entityManeger = getEntityManager();
 
-    $map->get('home' ,'/', function($request, $response) use ($view){
-        return $view->render($response,'categories/list.phtml');
-    });
 
-    $matcher = $routerContainer->getMatcher();
+$map->get('categories.lista', '/', function ($request, $response) use ($view, $entityManeger) {
+    $repository = $entityManeger->getRepository(\Curso\Entity\Category::class);
 
-    $route = $matcher->match($request);
+    $categories = $repository->findAll();
 
-    foreach ($route->attributes as $key => $val) {
-        $request = $request->withAttribute($key, $val);
-    }
+    return $view->render($response, 'categories/list.phtml', compact('categories'));
+});
 
-    $callable = $route->handler;
+$map->get('categories.create', '/create', function ($request, $response) use ($view) {
+    return $view->render($response, 'categories/create.phtml');
+});
 
-    /**
-     * @var Response $response
-     */
-    $response = $callable($request, new Response());
+$matcher = $routerContainer->getMatcher();
 
-    echo $response->getBody();
+$route = $matcher->match($request);
+
+foreach ($route->attributes as $key => $val) {
+    $request = $request->withAttribute($key, $val);
+}
+
+$callable = $route->handler;
+
+/**
+ * @var Response $response
+ */
+$response = $callable($request, new Response());
+
+echo $response->getBody();
