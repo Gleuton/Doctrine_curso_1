@@ -27,7 +27,7 @@ class Category
      * 
      * @return int
      */ 
-    public function getId()
+    public function getId():int
     {
         return $this->id;
     }
@@ -36,18 +36,16 @@ class Category
      * Get the value of name
      * @return string
      */ 
-    public function getName()
+    public function getName():string
     {
         return $this->name;
     }
 
     /**
-     * Set the value of name
-     *
-     * @return self
-     * 
-     */ 
-    public function setName($name)
+     * @param string $name
+     * @return Category
+     */
+    public function setName(string $name):Category
     {
         $this->name = $name;
 

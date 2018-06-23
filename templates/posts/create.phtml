@@ -1,0 +1,16 @@
+<?php include __DIR__ . '/../header.html'; ?>
+<div class="container">
+    <div class="row">
+        <h3>Cadastrar Post</h3>
+        <form method="post" action="/posts/store">
+            <div class="form-group">
+                <label for="title">Titulo:</label>
+                <input type="text" class="form-control" id="title" name="title">
+                <label for="content">Conteudo:</label>
+                <textarea class="form-control" id="content" name="content" rows="5"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+<?php include __DIR__ . '/../footer.html'; ?>

@@ -15,7 +15,8 @@ $map = $routerContainer->getMap();
 $entityManeger = getEntityManager();
 
 
-require_once __DIR__ . '/web.php';
+require_once __DIR__ . '/categoties.php';
+require_once __DIR__ . '/posts.php';
 
 $matcher = $routerContainer->getMatcher();
 

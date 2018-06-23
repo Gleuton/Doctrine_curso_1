@@ -1,8 +1,8 @@
 <?php include __DIR__ . '/../header.html'; ?>
     <div class="container">
         <div class="row">
-            <h3>Lista de categorias</h3>
-            <a class="btn btn-primary" href="/categories/create">Cadastrar</a>
+            <h3>Lista de Posts</h3>
+            <a class="btn btn-primary" href="/posts/create">Cadastrar</a>
             <table class="table">
                 <thead>
                 <tr>
@@ -12,13 +12,13 @@
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($categories as $category) { ?>
+                <?php foreach ($posts as $post) { ?>
                     <tr>
-                        <td><?= $category->getId() ?></td>
-                        <td><?= $category->getName() ?></td>
+                        <td><?= $post->getId() ?></td>
+                        <td><?= $post->getTitle() ?></td>
                         <td>
-                            <?= "<a href='/categories/edit/{$category->getId()}'>Editar</a>" ?> |
-                            <?= "<a href='/categories/remove/{$category->getId()}/submit'>Excluir</a>" ?>
+                            <?= "<a href='/posts/edit/{$post->getId()}'>Editar</a>" ?> |
+                            <?= "<a href='/posts/remove/{$post->getId()}/submit'>Excluir</a>" ?>
                         </td>
                     </tr>
                 <?php } ?>
