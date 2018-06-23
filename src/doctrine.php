@@ -18,7 +18,7 @@ $isDevMode = true;
 $dbParams = [
     'driver' => 'pdo_mysql',
     'user' => 'root',
-    'password' => 'outro',
+    'password' => '',
     'dbname' => 'son_doctrine'
 ];
 
