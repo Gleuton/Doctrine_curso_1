@@ -1,0 +1,15 @@
+<?php include __DIR__ . '/../header.html'; ?>
+<div class="container">
+    <div class="row">
+        <h3>Editar Categorias</h3>
+        <form method="post" action="<?="/edit/{$category->getId()}/submit"?>">
+            <div class="form-group">
+                <label for="name">Nome:</label>
+                <input type="text" class="form-control" id="name" name="name"
+                value="<?= $category->getName() ?>">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+<?php include __DIR__ . '/../footer.html'; ?>

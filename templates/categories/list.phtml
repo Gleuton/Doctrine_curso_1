@@ -16,7 +16,7 @@
                 <tr>
                     <td><?= $category->getId() ?></td>
                     <td><?= $category->getName() ?></td>
-                    <td><?= "<a href='/categories/{$category->getName()}/edit'>Editar</a>" ?></td>
+                    <td><?= "<a href='/edit/{$category->getId()}'>Editar</a>" ?></td>
                 </tr>
                 <?php } ?>
             </tbody>
