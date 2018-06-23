@@ -17,6 +17,7 @@
                     <td><?= $category->getId() ?></td>
                     <td><?= $category->getName() ?></td>
                     <td><?= "<a href='/edit/{$category->getId()}'>Editar</a>" ?></td>
+                    <td><?= "<a href='/remove/{$category->getId()}'>Excluir</a>" ?></td>
                 </tr>
                 <?php } ?>
             </tbody>
