@@ -7,7 +7,8 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
+                    <th>Nome</th>
+                    <th>Opções</th>
                 </tr>
             </thead>
             <tbody>
@@ -15,6 +16,7 @@
                 <tr>
                     <td><?= $category->getId() ?></td>
                     <td><?= $category->getName() ?></td>
+                    <td><?= "<a href='/categories/{$category->getName()}/edit'>Editar</a>" ?></td>
                 </tr>
                 <?php } ?>
             </tbody>
