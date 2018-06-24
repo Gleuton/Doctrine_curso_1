@@ -3,11 +3,11 @@
 
 Exemplos do curso de Doctrine parte 1
 
-<h3>Install instructions</h3>
+<h3>Install instructions:</h3>
 
 <ul>
     <li>
-        Database install: <br>
+        Database install:<br>
         vendor/bin/doctrine orm:schema-tool:create
     </li>
 </ul>

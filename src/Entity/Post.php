@@ -28,6 +28,11 @@ class Post
     private $content;
 
     /**
+     * @ManyToMany(targetEntity="Curso\Entity\Category")
+     */
+    private $categories;
+
+    /**
      * Get the value of id
      *
      * @return int
