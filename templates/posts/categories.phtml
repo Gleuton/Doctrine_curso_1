@@ -1,0 +1,22 @@
+<?php include __DIR__ . '/../header.html'; ?>
+    <div class="container">
+        <div class="row">
+            <h3>Adicionar Categorias</h3>
+            <h4><?= $posts->getTitle() ?></h4>
+            <form method="post" action="<?= "/posts/edit/{$posts->getId()}/set-categories" ?>">
+                <div class="form-group">
+                    <label for="title">Categorias:</label>
+                    <select class="form-control" id="title" name="categories[]" multiple>
+                        <?php
+                        foreach ($categories as $category) {
+                            echo "<option value='{$category->getId()}'>{$category->getName()}</option>";
+                        }
+                        ?>
+                    </select>
+
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+<?php include __DIR__ . '/../footer.html'; ?>

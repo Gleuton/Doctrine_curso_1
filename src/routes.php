@@ -14,6 +14,10 @@ $view = new \Slim\Views\PhpRenderer(__DIR__ . '/../templates/');
 $map = $routerContainer->getMap();
 $entityManeger = getEntityManager();
 
+$map->get('home', '/',
+    function ($request, $response) use ($view) {
+        return $view->render($response, 'home.phtml');
+    });
 
 require_once __DIR__ . '/categoties.php';
 require_once __DIR__ . '/posts.php';

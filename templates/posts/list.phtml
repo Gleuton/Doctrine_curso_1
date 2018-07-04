@@ -17,6 +17,7 @@
                         <td><?= $post->getId() ?></td>
                         <td><?= $post->getTitle() ?></td>
                         <td>
+                            <?= "<a href='/posts/categories/{$post->getId()}'>Categorias</a>" ?> |
                             <?= "<a href='/posts/edit/{$post->getId()}'>Editar</a>" ?> |
                             <?= "<a href='/posts/remove/{$post->getId()}/submit'>Excluir</a>" ?>
                         </td>

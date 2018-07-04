@@ -34,7 +34,7 @@ $map->post('posts.store', '/posts/store',
 
         $posts = new \Curso\Entity\Post();
         $posts->setTitle($data['title'])
-              ->setContent($data['content']);
+            ->setContent($data['content']);
 
         $entityManeger->persist($posts);
         $entityManeger->flush();
@@ -71,4 +71,21 @@ $map->get('posts.remove', '/posts/remove/{id}/submit',
 
         $uri = $generator->generate('posts.list');
         return new Response\RedirectResponse($uri);
+    });
+
+$map->get('posts.categories', '/posts/categories/{id}',
+    function (ServerRequestInterface $request, $response) use ($view, $entityManeger) {
+
+        $id = $request->getAttribute('id');
+
+        $repository = $entityManeger->getRepository(\Curso\Entity\Post::class);
+        $categoryRepository = $entityManeger->getRepository(\Curso\Entity\Category::class);
+        $categories = $categoryRepository->findAll();
+        $posts = $repository->find($id);
+
+        return $view->render($response, 'posts/categories.phtml', [
+                'posts' => $posts,
+                'categories' => $categories
+            ]
+        );
     });
