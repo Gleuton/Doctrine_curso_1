@@ -89,3 +89,20 @@ $map->get('posts.categories', '/posts/categories/{id}',
             ]
         );
     });
+
+$map->post('posts.set-categories', '/posts/{id}/set-categories',
+    function (ServerRequestInterface $request, $response) use ($view, $entityManeger, $generator) {
+        $data = $request->getParsedBody();
+        $id = $request->getAttribute('id');
+
+        $repository = $entityManeger->getRepository(\Curso\Entity\Post::class);
+        $posts = $repository->find($id);
+
+        $posts->setTitle($data['title'])
+            ->setContent($data['content']);
+
+        $entityManeger->flush();
+
+        $uri = $generator->generate('posts.list');
+        return new Response\RedirectResponse($uri);
+    });
