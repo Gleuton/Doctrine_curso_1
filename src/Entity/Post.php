@@ -1,6 +1,9 @@
 <?php
 
 namespace Curso\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * @Entity
  * @Table(name="posts")
@@ -31,6 +34,11 @@ class Post
      * @ManyToMany(targetEntity="Curso\Entity\Category")
      */
     private $categories;
+
+    public function __construct()
+    {
+        $this->categories = new ArrayCollection();
+    }
 
     /**
      * Get the value of id
@@ -76,6 +84,24 @@ class Post
     {
         $this->content = $content;
         return $this;
+    }
+
+    /**
+     * @param Category $category
+     * @return Post
+     */
+    public function addCategory(Category $category): Post
+    {
+        $this->categories->add($category);
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getCategories(): ArrayCollection
+    {
+        return $this->categories;
     }
 
 }
