@@ -2,10 +2,13 @@
 
 use \Psr\Http\Message\ServerRequestInterface;
 use \Zend\Diactoros\Response;
+use \Curso\Entity\{
+    Post, Category
+};
 
 $map->get('posts.list', '/posts/',
     function (ServerRequestInterface $request, $response) use ($view, $entityManeger) {
-        $repository = $entityManeger->getRepository(\Curso\Entity\Post::class);
+        $repository = $entityManeger->getRepository(Post::class);
 
         $posts = $repository->findAll();
 
@@ -17,7 +20,7 @@ $map->get('posts.form.edit', '/posts/edit/{id}',
 
         $id = $request->getAttribute('id');
 
-        $repository = $entityManeger->getRepository(\Curso\Entity\Post::class);
+        $repository = $entityManeger->getRepository(Post::class);
         $posts = $repository->find($id);
 
         return $view->render($response, 'posts/edit.phtml', compact('posts'));
@@ -47,7 +50,7 @@ $map->post('posts.edit', '/posts/edit/{id}/submit',
         $data = $request->getParsedBody();
         $id = $request->getAttribute('id');
 
-        $repository = $entityManeger->getRepository(\Curso\Entity\Post::class);
+        $repository = $entityManeger->getRepository(Post::class);
         $posts = $repository->find($id);
 
         $posts->setTitle($data['title'])
@@ -63,7 +66,7 @@ $map->get('posts.remove', '/posts/remove/{id}/submit',
     function (ServerRequestInterface $request, $response) use ($view, $entityManeger, $generator) {
         $id = $request->getAttribute('id');
 
-        $repository = $entityManeger->getRepository(\Curso\Entity\Post::class);
+        $repository = $entityManeger->getRepository(Post::class);
         $posts = $repository->find($id);
 
         $entityManeger->remove($posts);
@@ -78,8 +81,8 @@ $map->get('posts.categories', '/posts/categories/{id}',
 
         $id = $request->getAttribute('id');
 
-        $repository = $entityManeger->getRepository(\Curso\Entity\Post::class);
-        $categoryRepository = $entityManeger->getRepository(\Curso\Entity\Category::class);
+        $repository = $entityManeger->getRepository(Post::class);
+        $categoryRepository = $entityManeger->getRepository(Category::class);
         $categories = $categoryRepository->findAll();
         $posts = $repository->find($id);
 
@@ -95,11 +98,20 @@ $map->post('posts.set-categories', '/posts/{id}/set-categories',
         $data = $request->getParsedBody();
         $id = $request->getAttribute('id');
 
-        $repository = $entityManeger->getRepository(\Curso\Entity\Post::class);
-        $posts = $repository->find($id);
+        $postRepository = $entityManeger->getRepository(Post::class);
+        $categoryRepository = $entityManeger->getRepository(Category::class);
 
-        $posts->setTitle($data['title'])
-            ->setContent($data['content']);
+        /** @var Post $post */
+        $post = $postRepository->find($id);
+        $post->getCategories()->clear();
+
+        foreach ($data as $idCategory) {
+            /** @var Category $category */
+            $category = $categoryRepository->find($idCategory);
+            if (!empty($category)) {
+                $post->addCategory($category);
+            }
+        }
 
         $entityManeger->flush();
 
