@@ -3,15 +3,17 @@
         <div class="row">
             <h3>Adicionar Categorias</h3>
             <h4><?= $posts->getTitle() ?></h4>
-            <form method="post" action="<?= "/posts/edit/{$posts->getId()}/set-categories" ?>">
+            <form method="post" action="<?= "/posts/{$posts->getId()}/set-categories" ?>">
                 <div class="form-group">
                     <label for="title">Categorias:</label>
                     <select class="form-control" id="title" name="categories[]" multiple>
-                        <?php
-                        foreach ($categories as $category) {
-                            echo "<option value='{$category->getId()}'>{$category->getName()}</option>";
-                        }
-                        ?>
+                        <?php foreach ($categories as $category): ?>
+                            <option value='<?= $category->getId() ?>'
+                                <?= $posts->getCategories()->contains($category) ? 'selected' :'' ?>>
+                                <?= $category->getName() ?>
+                            </option>";
+                        <?php endforeach; ?>
+
                     </select>
 
                 </div>

@@ -95,8 +95,8 @@ $map->get('posts.categories', '/posts/categories/{id}',
 
 $map->post('posts.set-categories', '/posts/{id}/set-categories',
     function (ServerRequestInterface $request, $response) use ($view, $entityManeger, $generator) {
-        $data = $request->getParsedBody();
         $id = $request->getAttribute('id');
+        $data = $request->getParsedBody();
 
         $postRepository = $entityManeger->getRepository(Post::class);
         $categoryRepository = $entityManeger->getRepository(Category::class);
@@ -105,7 +105,7 @@ $map->post('posts.set-categories', '/posts/{id}/set-categories',
         $post = $postRepository->find($id);
         $post->getCategories()->clear();
 
-        foreach ($data as $idCategory) {
+        foreach ($data['categories'] as $idCategory) {
             /** @var Category $category */
             $category = $categoryRepository->find($idCategory);
             if (!empty($category)) {

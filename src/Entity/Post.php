@@ -3,6 +3,7 @@
 namespace Curso\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\PersistentCollection;
 
 /**
  * @Entity
@@ -97,9 +98,9 @@ class Post
     }
 
     /**
-     * @return ArrayCollection
+     * @return ArrayCollection|PersistentCollection
      */
-    public function getCategories(): ArrayCollection
+    public function getCategories()
     {
         return $this->categories;
     }
