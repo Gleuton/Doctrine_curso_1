@@ -6,6 +6,34 @@ use \Curso\Entity\{
     Post, Category
 };
 
+$map->get('home', '/{search}?',
+    function (ServerRequestInterface $request, $response) use ($view, $entityManeger) {
+
+        $postsRepository = $entityManeger->getRepository(Post::class);
+        $categoryRepository = $entityManeger->getRepository(Category::class);
+        $search = $request->getAttribute('search') ?? null;
+
+        $posts = $postsRepository->findAll();
+
+        if (!is_null($search)) {
+            $queryBuilder = $postsRepository->createQueryBuilder('post');
+            $queryBuilder->join('post.categories', 'categories')
+                ->where(
+                    $queryBuilder->expr()->eq('categories.id', $search)
+                );
+            $posts = $queryBuilder->getQuery()->getResult();
+        }
+
+        $categories = $categoryRepository->findAll();
+
+
+        return $view->render($response, 'home.phtml', [
+                'posts' => $posts,
+                'categories' => $categories
+            ]
+        );
+    });
+
 $map->get('posts.list', '/posts/',
     function (ServerRequestInterface $request, $response) use ($view, $entityManeger) {
         $repository = $entityManeger->getRepository(Post::class);
