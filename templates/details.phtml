@@ -1,0 +1,23 @@
+<?php include __DIR__ . '/header.html'; ?>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10">
+                <h3><?= $post->getTitle(); ?></h3>
+                <div class="jumbotron">
+                    <p class="text-justify">
+                        <?= $post->getContent(); ?>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <ul>
+                    <?php foreach ($categories as $category): ?>
+                        <li class="list-group-item">
+                            <a href="/<?= $category->getId(); ?>"> <?= $category->getName(); ?></a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        </div>
+    </div>
+<?php include __DIR__ . '/footer.html'; ?>

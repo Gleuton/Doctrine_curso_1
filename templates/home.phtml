@@ -7,12 +7,12 @@
                     <?php foreach ($posts as $post): ?>
                         <li>
                             <div class="jumbotron">
-                                <h1><?= $post->getTitle(); ?></h1>
-                                <p>
-                                    <?= substr($post->getContent(), 0, 20); ?>
+                                <h2><?= $post->getTitle(); ?></h2>
+                                <p class="text-justify">
+                                    <?= substr($post->getContent(), 0, 200).' ...'; ?>
                                 </p>
                                 <p>
-                                    <a class="btn btn-primary" href="#" role="option">Leia Mais</a>
+                                    <a class="btn btn-primary" href="/post/<?= $post->getId()?>" role="link">Leia Mais</a>
                                 </p>
                             </div>
                         </li>
@@ -24,7 +24,7 @@
                 <ul>
                     <?php foreach ($categories as $category): ?>
                         <li class="list-group-item">
-                           <a href="<?= $category->getId(); ?>"> <?= $category->getName(); ?></a>
+                           <a href="/<?= $category->getId(); ?>"> <?= $category->getName(); ?></a>
                         </li>
                     <?php endforeach; ?>
                 </ul>
